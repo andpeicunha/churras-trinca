@@ -1,6 +1,7 @@
 "use client";
 import "./globals.css";
 
+import React from "react";
 import { NextAuthProvider } from "./providers";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

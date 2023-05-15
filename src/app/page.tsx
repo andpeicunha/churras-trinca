@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginButton, LogoutButton, ProfileButton, RegisterButton } from "@/components/buttons.component";
+import { LoginButton, LogoutButton } from "@/components/buttons.component";
 import { useSession } from "next-auth/react";
 
 export default function Home() {
