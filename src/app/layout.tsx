@@ -4,12 +4,11 @@ import "./globals.css";
 import React from "react";
 import { NextAuthProvider } from "./providers";
 
-export default function RootLayout(props: { children: string }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <head />
       <body>
-        <NextAuthProvider>{props.children}</NextAuthProvider>
+        <NextAuthProvider>{children}</NextAuthProvider>
       </body>
     </html>
   );
