@@ -5,9 +5,10 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/app/lib/mongoConnect";
 
 const handler = NextAuth({
-  secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise),
-
+  // pages: {
+  //   verifyRequest: "/auth/verify",
+  // },
   providers: [
     EmailProvider({
       server: {
@@ -21,6 +22,7 @@ const handler = NextAuth({
       from: process.env.SMTP_FROM,
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export { handler as GET, handler as POST };

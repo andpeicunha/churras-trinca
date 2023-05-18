@@ -3,6 +3,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ffd836;
+  font-size: 15px;
+
+  #valida {
+    font-size: 10px !important;
+  }
 
   & button {
     background-color: #999;
@@ -11,5 +17,12 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
