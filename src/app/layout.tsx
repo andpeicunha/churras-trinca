@@ -1,5 +1,7 @@
 "use client";
 
+import "./globals.css";
+
 import AuthContext from "./lib/authContext";
 
 import { Inter } from "next/font/google";
