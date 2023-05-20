@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { Agenda } from "./components/agenda/page";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -12,5 +13,9 @@ export default async function Home() {
     redirect("/auth/signin");
   }
 
-  return <>{session?.user?.email}</>;
+  return (
+    <>
+      <Agenda />
+    </>
+  );
 }
