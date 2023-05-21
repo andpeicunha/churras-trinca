@@ -1,6 +1,8 @@
 import NextAuth from "next-auth";
-import EmailProvider from "next-auth/providers/email";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+
+import EmailProvider from "next-auth/providers/email";
+import GoogleProvider from "next-auth/providers/google";
 
 import clientPromise from "@/app/lib/mongoConnect";
 
@@ -10,7 +12,12 @@ export const authOptions = {
     verifyRequest: "/auth/verify",
     signIn: "/auth/signin",
   },
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    }),
     EmailProvider({
       server: {
         host: process.env.SMTP_HOST,
@@ -23,7 +30,47 @@ export const authOptions = {
       from: process.env.SMTP_FROM,
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log({
+        signInUser: user,
+        signInAccount: account,
+        signInProfile: profile,
+        signInEmail: email,
+        signInCredentials: credentials,
+      });
+      if (account?.provider === "google") {
+        console.log("Google sign-in detected.");
+        console.log("User email:", user.email);
+        console.log("Profile:", profile);
+        console.log("Account:", account);
+      }
+
+      return true;
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      console.log("jwt callback");
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      console.log({ token, user, account, profile, isNewUser });
+      return token;
+    },
+
+    async session({ session, user, token, newSession }) {
+      console.log("session callback");
+
+      console.log({ YESESSIONHERE: session, YESUSER: user, token, newSession });
+      if (session.user) {
+        session.user.id = user.id;
+        session.user.email = user.email;
+        // (session.user.id = token.sub as string),
+        //   (session.user.email = token.email as string);
+      }
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);

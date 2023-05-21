@@ -4,7 +4,7 @@ import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { ButtonSubmit } from "@/app/components/button.component";
-import { Agenda } from "@/app/components/agenda/page";
+import { Agenda } from "@/app/components/agenda/agenda";
 
 import Style from "./page.module.scss";
 
@@ -38,13 +38,7 @@ export default function SignInPage() {
     <>
       <div className={Style.main}>
         <div className={Style.img}>
-          <Image
-            src="/churras-firma.jpg"
-            alt="logo"
-            fill={true}
-            priority
-            sizes="(max-width: 1000px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          <Image src="/churras-firma.jpg" alt="logo" fill={true} priority sizes="(max-width: 1000px) 100vw" />
         </div>
 
         <div className={Style.formMain}>
@@ -61,8 +55,11 @@ export default function SignInPage() {
               value={email}
               onChange={handleEmailChange}
             />
-            <ButtonSubmit value="Entrar" />
+            <ButtonSubmit value="Entrar" type="submit" />
+            {/* <div className={Style.divider} />
+            <ButtonSubmit value="Google" type="button" onClick={() => signIn("google")} /> */}
           </form>
+          <Image src="/bg-home.png" alt="background" fill={true} priority sizes="(max-width: 1000px) 100vw" />
         </div>
       </div>
     </>

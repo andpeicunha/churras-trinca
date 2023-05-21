@@ -1,4 +1,5 @@
 import axios from "axios";
+import { method } from "cypress/types/bluebird";
 import { ObjectId } from "mongodb";
 
 export interface Event {
@@ -10,10 +11,22 @@ export interface Event {
   total_people?: string;
   current_total?: string;
 }
+
 export async function getEvents() {
   try {
     const response = await axios.get("/api/getEvents");
     // console.log("GETEVENTES...", response.data.events);
+    return response.data as Event[];
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function addEvent(name: string, date: string) {
+  try {
+    const response = await axios.post(`/api/addEvent?name=${name}&date=${date}`);
+    console.log("ADD EVENT...", response.data.events);
     return response.data as Event[];
   } catch (error) {
     console.log(error);
