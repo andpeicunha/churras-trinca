@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 
 import { signOut, useSession } from "next-auth/react";
-import { getEvents, Event } from "@/app/lib/axiosFetch";
+import { getEvents, Event, addEvent } from "@/app/lib/axiosFetch";
 
 export function Agenda() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -26,12 +26,18 @@ export function Agenda() {
     }
   }, [events]);
 
+  function handleNewEvent() {
+    const newName = "New Event 2";
+    const newDate = "05-06-2023";
+    addEvent(newName, newDate);
+  }
+
   return (
     <>
       <div>Agenda</div>
       <div>{session?.user?.email}</div>
 
-       {Array.isArray(events) && events.length !== 0 && (
+      {Array.isArray(events) && events.length !== 0 && (
         <div>
           <ul>
             {events.map((e) => (
@@ -40,7 +46,7 @@ export function Agenda() {
           </ul>
         </div>
       )}
-
+      <button onClick={handleNewEvent}>Novo Evento</button>
       <button onClick={() => signOut()}>Sair</button>
     </>
   );
