@@ -3,7 +3,6 @@
 import "./globals.css";
 
 import AuthContext from "./lib/authContext";
-
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -17,7 +16,7 @@ export interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="pt-BR">
+    <html>
       <head />
       <body className={inter.className}>
         <AuthContext>{children}</AuthContext>
