@@ -1,14 +1,8 @@
 "use client";
-
-import "./globals.css";
+import "./global.css";
 
 import AuthContext from "./lib/authContext";
-import { Inter } from "next/font/google";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+import { inter } from "@/app/styles/fonts";
 
 export interface RootLayoutProps {
   children: React.ReactNode;
@@ -17,7 +11,6 @@ export interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html>
-      <head />
       <body className={inter.className}>
         <AuthContext>{children}</AuthContext>
       </body>

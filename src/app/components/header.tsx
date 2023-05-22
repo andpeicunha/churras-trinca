@@ -1,32 +1,45 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import React from "react";
 
 import { signOut, useSession } from "next-auth/react";
-import { getEvents, Event, addEvent } from "@/app/lib/axiosFetch";
+import { Avatar, Menu, MenuItem } from "@mui/material";
 
-import Style from "./header.module.css";
+import Style from "./header.module.scss";
 
-export function Agenda() {
+export function HeaderUser() {
   const { data: session } = useSession({
     required: true,
   });
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <>
       <section className={Style.main}>
-        <div>{session?.user?.email}</div>
+        <div className={Style.email}>{session?.user?.email}</div>
 
-        <button onClick={() => signOut()}>Sair</button>
-        <Image
-          src="/bg-home-full.png"
-          alt="background"
-          fill
-          sizes="(max-width: 768px) 100vw"
-          quality={90}
-          priority
-          className={Style.imgBg}
-        />
+        <button onClick={handleClick}>
+          <Avatar alt="Avatar" className={Style.avatar} />
+        </button>
+
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          {/* <MenuItem onClick={handleClose}>Perfil</MenuItem> */}
+          <MenuItem onClick={() => signOut()}>Logout</MenuItem>
+        </Menu>
       </section>
     </>
   );

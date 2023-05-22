@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 1.3fr 1fr;
 
-  @include for-tablet-portrait-up {
+  @include tablet-768 {
     grid-template-columns: 1fr;
   }
 
@@ -15,7 +15,7 @@
   overflow: hidden;
   position: relative;
 
-  @include for-tablet-portrait-up {
+  @include tablet-768 {
     display: none;
   }
 
@@ -46,6 +46,7 @@
   & form {
     margin-top: 20%;
   }
+
   & label {
     font-size: 21px;
     font-weight: 700;

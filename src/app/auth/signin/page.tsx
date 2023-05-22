@@ -4,9 +4,9 @@ import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { ButtonSubmit } from "@/app/components/button.component";
-import { Agenda } from "@/app/components/agenda/agenda";
+import { Agenda } from "@/app/components/agenda";
 
-import Style from "./page.module.scss";
+import style from "./page.module.scss";
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
@@ -23,7 +23,7 @@ export default function SignInPage() {
   };
 
   if (status === "loading") {
-    return <div className={Style.main}>Verificando Login...</div>;
+    return <div className={style.main}>Verificando Login...</div>;
   }
 
   if (session) {
@@ -36,12 +36,12 @@ export default function SignInPage() {
 
   return (
     <>
-      <div className={Style.main}>
-        <div className={Style.img}>
+      <div className={style.main}>
+        <div className={style.img}>
           <Image src="/churras-firma.jpg" alt="logo" fill={true} priority sizes="(max-width: 1000px) 100vw" />
         </div>
 
-        <div className={Style.formMain}>
+        <div className={style.formMain}>
           <h1>Agenda de Churras</h1>
 
           <form onSubmit={onSubmit}>
@@ -56,7 +56,7 @@ export default function SignInPage() {
               onChange={handleEmailChange}
             />
             <ButtonSubmit value="Entrar" type="submit" />
-            {/* <div className={Style.divider} />
+            {/* <div className={style.divider} />
             <ButtonSubmit value="Google" type="button" onClick={() => signIn("google")} /> */}
           </form>
           <Image src="/bg-home.png" alt="background" fill={true} priority sizes="(max-width: 1000px) 100vw" />
