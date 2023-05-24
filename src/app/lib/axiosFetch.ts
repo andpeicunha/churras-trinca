@@ -3,23 +3,28 @@ import { ObjectId } from "mongodb";
 
 export interface IPropsEvent {
   events?: string;
-  status?: string;
   _id: ObjectId;
-  id?: string;
   name: string;
-  date?: string;
+  date: string;
+  description?: string;
+  status?: string;
+  id?: string;
   total_people?: string;
   current_total?: string;
-  description?: string;
 }
 
 type TodoErrorResponse = {
   error: string;
 };
-export async function getEvents() {
+export async function getEvents(id?: string) {
   try {
-    const response = await axios.get("/api/getEvents");
+    if (id) {
+      const response = await axios.get(`/api/getEvents?_id=${id}`);
+      return response.data as IPropsEvent[];
+    }
+    const response = await axios.get(`/api/getEvents`);
     return response.data as IPropsEvent[];
+    //
   } catch (error) {
     console.log(error);
     return null;
@@ -28,9 +33,7 @@ export async function getEvents() {
 
 export async function addEvent(event: string) {
   try {
-    console.log("ENTROU FUNÇÃO FETCH AXIOS POST");
     const response = await axios.post(`/api/addEvent?${event}`);
-
     return response;
   } catch (err: unknown) {
     if (isAxiosError(err)) {

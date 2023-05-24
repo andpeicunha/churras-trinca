@@ -1,16 +1,17 @@
 import React from "react";
 
 import Image from "next/image";
-import { IPropsEvent } from "@/app/lib/axiosFetch";
-import { raleway } from "@/app/styles/fonts";
+import Link from "next/link";
 
-import Style from "./agenda.module.scss";
+import { IPropsEvent } from "@/app/lib/axiosFetch";
+
+import Style from "@/app/agenda/page.module.scss";
 
 interface IPropsBoxEvent extends IPropsEvent {
   onClick: () => void;
 }
 
-export default function BoxEvent({ ...props }: IPropsBoxEvent) {
+export function BoxEvent({ ...props }: IPropsBoxEvent) {
   return (
     <div
       data-testid={`section-event-${props._id.toString()}`}
@@ -27,11 +28,11 @@ export default function BoxEvent({ ...props }: IPropsBoxEvent) {
       <div className={Style.details}>
         <div className={Style.people}>
           <Image src="/icon-people.png" alt="Qtde de Pessoas" width={20} height={20} />
-          <span className={raleway.className}>{!props.total_people ? " -" : props.total_people}</span>
+          <span>{!props.total_people ? " -" : props.total_people}</span>
         </div>
         <div className={Style.money}>
           <Image src="/icon-money.png" alt="Qtde de Pessoas" width={20} height={20} />
-          <span className={raleway.className}>{!props.current_total ? " -" : `R$ ${props.current_total}`}</span>
+          <span>{!props.current_total ? " -" : `R$ ${props.current_total}`}</span>
         </div>
       </div>
     </div>

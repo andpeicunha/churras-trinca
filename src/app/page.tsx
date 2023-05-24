@@ -5,13 +5,7 @@ import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 
 import { authOptions } from "./api/auth/[...nextauth]/route";
-import { Agenda } from "./components/agenda";
-
-import { Inter } from "next/font/google";
-
-const inter = Inter({
-  subsets: ["latin"],
-});
+import { Agenda } from "@/app/agenda/page";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -21,10 +15,8 @@ export default async function Home() {
   }
 
   return (
-    <>
-      <body className={inter.className}>
-        <Agenda />
-      </body>
-    </>
+    <div>
+      <Agenda />
+    </div>
   );
 }

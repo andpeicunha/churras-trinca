@@ -1,19 +1,20 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-
-import { getEvents, addEvent, IPropsEvent } from "@/app/lib/axiosFetch";
-import { HeaderUser } from "./header";
-
-import Style from "./agenda.module.scss";
 import { Box, Modal, Skeleton, Input } from "@mui/material";
-
 import { ErrorMessage } from "@hookform/error-message";
 import { useForm } from "react-hook-form";
-import { ButtonSubmit } from "./button.component";
-import BoxEvent from "./boxEvent";
-import ButtonAddEvent from "./buttonAddEvent";
+
+import { HeaderUser } from "@/app/components/header";
+import { Footer } from "@/app/components/footer";
+import { BgMain } from "@/app/components/main";
+import { ButtonSubmit } from "@/app/components/button.component";
+import { BoxEvent } from "@/app//components/boxEvent";
+import { ButtonAddEvent } from "@/app/components/buttonAddEvent";
+import { getEvents, addEvent, IPropsEvent } from "@/app/lib/axiosFetch";
+
+import Style from "./page.module.scss";
 
 interface IFormInputs {
   name: string;
@@ -23,6 +24,7 @@ interface IFormInputs {
 }
 
 export function Agenda() {
+  const router = useRouter();
   const {
     register,
     resetField,
@@ -35,7 +37,7 @@ export function Agenda() {
   const [events, setEvents] = useState<IPropsEvent[]>([]);
   const [open, setOpen] = React.useState(false);
   const [message, setMessage] = useState("");
-  const { data: session, status } = useSession({
+  const { status } = useSession({
     required: true,
   });
 
@@ -55,17 +57,21 @@ export function Agenda() {
 
   // const onSubmit = (data: IFormInputs) => alert(JSON.stringify(data));
   function onSubmit(data: IFormInputs) {
+    setMessage(" Cadastrando, por favor aguarde...");
     const newEvent = `name=${data.name}&date=${data.date}&description=${data.description}`;
     addEvent(newEvent)
       .then((response) => {
-        console.log(response?.status);
         if (response?.status === 200) {
           resetField("name");
           resetField("date");
           resetField("description");
           setEvents([]);
-          setMessage("Evento adicionado com sucesso!");
-          setOpen(false);
+          setMessage(" Seu Evento foi adicionado com sucesso!");
+
+          setTimeout(() => {
+            setOpen(false);
+            setMessage("");
+          }, 1500);
         }
       })
       .catch((error) => {
@@ -74,11 +80,14 @@ export function Agenda() {
       });
   }
 
-  function handleViewDetailsEvent(event: string) {
-    console.log(event);
-    setEvents([]);
+  function handleViewDetails(id: any) {
+    router.push(`/details/${id}`);
   }
-  const handleOpen = () => setOpen(true);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
 
   return (
@@ -104,7 +113,7 @@ export function Agenda() {
                 {events.map((e) => (
                   <BoxEvent
                     key={e._id.toString()}
-                    onClick={() => handleViewDetailsEvent(e._id.toString())}
+                    onClick={() => handleViewDetails(e._id.toString())}
                     _id={e._id}
                     name={e.name}
                     date={e.date}
@@ -116,16 +125,8 @@ export function Agenda() {
             </>
           )
         )}
-        <Image
-          src="/bg-home-full.png"
-          alt="background"
-          fill
-          sizes="(max-width: 768px) 100vw"
-          quality={90}
-          priority
-          className={Style.imgBg}
-        />
-        {status === "loading" ? <div className={Style.bgCinzaLoad} /> : <div className={Style.bgCinza} />}
+        <BgMain status={status} />
+        <Footer />
       </section>
 
       <Modal open={open} onClose={handleClose}>
@@ -180,6 +181,7 @@ export function Agenda() {
           />
           <ErrorMessage errors={errors} name="description" render={({ message }) => <p>{message}</p>} />
 
+          {!message ? null : <p className={Style.messageAPI}> {message}</p>}
           <ButtonSubmit type="submit" value="Cadastrar Evento" />
         </Box>
       </Modal>

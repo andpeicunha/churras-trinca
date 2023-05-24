@@ -1,0 +1,11 @@
+@import "@/app/styles/mixins";
+
+.footerMain {
+    position: relative;
+    bottom: 10px;
+    margin-top: 50px;
+
+    img {
+        opacity: 0.3;
+    }
+}

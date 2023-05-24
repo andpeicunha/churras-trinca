@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/app/lib/mongoConnect";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);

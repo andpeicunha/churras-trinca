@@ -4,7 +4,7 @@ import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { ButtonSubmit } from "@/app/components/button.component";
-import { Agenda } from "@/app/components/agenda";
+import { Agenda } from "@/app/agenda/page";
 
 import style from "./page.module.scss";
 

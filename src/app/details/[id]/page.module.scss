@@ -1,0 +1,35 @@
+@import "@/app/styles/mixins.scss";
+
+.boxDetailMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+    min-height: 400px;
+
+    margin-top: 2rem;
+    padding-top: 1rem;
+
+    background-color: white;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.TitleDate,
+.TitleName {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin-top: 10px;
+
+    [data-testid="event-date"] {
+        font-size: $font-size-lg;
+        font-weight: 900;
+    }
+
+    [data-testid="event-name"] {
+        font-size: $font-size-xl;
+        font-weight: 800;
+    }
+}
