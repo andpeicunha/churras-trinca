@@ -4,7 +4,7 @@
   display: grid;
   grid-template-columns: 1.3fr 1fr;
 
-  @include for-tablet-portrait-up {
+  @include tablet-768 {
     grid-template-columns: 1fr;
   }
 
