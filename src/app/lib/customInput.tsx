@@ -2,7 +2,7 @@ import React from "react";
 import { PatternFormat, PatternFormatProps } from "react-number-format";
 
 interface CustomProps {
-  onChange: (event: { target: { value: string } }) => void;
+  onChange: (event: { target: { value: string } }) => void; // eslint-disable-line no-unused-vars
   format: string;
 }
 

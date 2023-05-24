@@ -44,7 +44,7 @@ export default function EventDetails() {
     if (events === undefined) {
       fetchEvents();
     }
-  }, [events]);
+  }, [events]); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function fetchEvents() {
     const eventsList = await getEvents(id);
