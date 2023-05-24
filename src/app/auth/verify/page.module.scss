@@ -16,7 +16,7 @@
   overflow: hidden;
   position: relative;
 
-  @include for-tablet-portrait-up {
+  @include tablet-768 {
     display: none;
   }
 
