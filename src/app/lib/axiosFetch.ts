@@ -41,3 +41,14 @@ export async function addEvent(event: string) {
     }
   }
 }
+
+export async function addUserEvent(event: string) {
+  try {
+    const response = await axios.post(`/api/addEvent?${event}`);
+    return response;
+  } catch (err: unknown) {
+    if (isAxiosError(err)) {
+      console.log(err.response?.data as TodoErrorResponse);
+    }
+  }
+}

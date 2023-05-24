@@ -3,7 +3,7 @@
 import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
-import { ButtonSubmit } from "@/app/components/button.component";
+import { ButtonSubmit } from "@/app/components/button";
 import { Agenda } from "@/app/agenda/page";
 
 import style from "./page.module.scss";
@@ -59,7 +59,7 @@ export default function SignInPage() {
             {/* <div className={style.divider} />
             <ButtonSubmit value="Google" type="button" onClick={() => signIn("google")} /> */}
           </form>
-          <Image src="/bg-home.png" alt="background" fill={true} priority sizes="(max-width: 1000px) 100vw" />
+          <Image src="/bg-home-full.png" alt="background" fill={true} priority sizes="(max-width: 1000px) 100vw" />
         </div>
       </div>
     </>

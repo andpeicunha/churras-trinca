@@ -1,5 +1,9 @@
 @import "@/app/styles/mixins.scss";
 
+.main {
+    font-family: var(--font-inter);
+}
+
 .boxDetailMain {
     display: flex;
     flex-direction: column;
@@ -16,20 +20,84 @@
     z-index: 100;
 }
 
-.TitleDate,
-.TitleName {
+.titleSection {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     width: 90%;
     margin-top: 10px;
 
-    [data-testid="event-date"] {
-        font-size: $font-size-lg;
-        font-weight: 900;
+    .TitleDate,
+    .TitleName {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+
+        [data-testid="event-date"] {
+            font-size: $font-size-lg;
+            font-weight: 900;
+        }
+
+        [data-testid="event-name"] {
+            font-size: $font-size-xl;
+            font-weight: 800;
+        }
+    }
+}
+
+.addUserSection {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    font-family: var(--font-inter);
+
+    .iconAddUser {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        margin-top: 15px;
+
+        & img {
+            margin-right: 10px;
+            cursor: pointer;
+        }
     }
 
-    [data-testid="event-name"] {
-        font-size: $font-size-xl;
-        font-weight: 800;
+    .accordionTitle {
+        font-size: $font-size-sm;
+    }
+
+    .formAddUser {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+        margin-top: 10px;
+
+
+
+        input {
+            padding-left: 5px;
+        }
+
+        & button {
+            grid-column: 1/span 2;
+        }
+
+        [data-testid="input-name"],
+        [data-testid="input-valor"] {
+            p {
+                color: red;
+                font-size: $font-size-sm;
+                margin-top: 0;
+            }
+
+            p::before {
+                display: inline;
+                content: "⚠ ";
+            }
+        }
+
     }
 }

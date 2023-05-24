@@ -1,5 +1,4 @@
 // "use client";
-import "./global.css";
 
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";

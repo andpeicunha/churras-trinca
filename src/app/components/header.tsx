@@ -25,7 +25,7 @@ export function HeaderUser() {
         <div className={Style.email}>{session?.user?.email}</div>
 
         <button onClick={handleClick}>
-          <Avatar alt="Avatar" className={Style.avatar} />
+          <Avatar src="/avatar.png" alt="Avatar" className={Style.avatar} />
         </button>
 
         <Menu

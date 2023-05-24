@@ -8,10 +8,9 @@ import { useForm } from "react-hook-form";
 
 import { HeaderUser } from "@/app/components/header";
 import { Footer } from "@/app/components/footer";
-import { BgMain } from "@/app/components/main";
-import { ButtonSubmit } from "@/app/components/button.component";
+import { BgMain } from "@/app/components/background";
+import { ButtonSubmit, ButtonAddEvent } from "@/app/components/button";
 import { BoxEvent } from "@/app//components/boxEvent";
-import { ButtonAddEvent } from "@/app/components/buttonAddEvent";
 import { getEvents, addEvent, IPropsEvent } from "@/app/lib/axiosFetch";
 
 import Style from "./page.module.scss";
@@ -188,3 +187,62 @@ export function Agenda() {
     </>
   );
 }
+
+// const ModalNewEvent = () => {
+//   return (
+//     <Box className={Style.modal} component="form" autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+//       <div className={Style.title}>Cadastrar Novo Churras</div>
+
+//       <div className={Style.label} data-req>
+//         Nome do Evento
+//       </div>
+//       <Input
+//         {...register("name", {
+//           required: "Campo obrigatório",
+//           maxLength: {
+//             value: 35,
+//             message: "Excedeu o tamanho máximo de 35 caracteres.",
+//           },
+//         })}
+//         className={Style.input}
+//         placeholder="Coloque aqui o nome do evento (Max: 20 caracteres)"
+//         disableUnderline
+//       />
+//       <ErrorMessage errors={errors} name="name" render={({ message }) => <p>{message}</p>} />
+
+//       <div className={Style.label} data-req>
+//         Data do Evento
+//       </div>
+//       <Input
+//         {...register("date", {
+//           required: "Campo obrigatório",
+//           pattern: {
+//             value: /\d{2}\/\d{2}/,
+//             message: "Formato inválido (DD/MM) ex: 05/06",
+//           },
+//         })}
+//         className={Style.input}
+//         placeholder="Preencha a Data do Evento (DD/MM)"
+//         disableUnderline
+//       />
+//       <ErrorMessage errors={errors} name="date" render={({ message }) => <p>{message}</p>} />
+
+//       <div className={Style.label}>Descrição</div>
+//       <Input
+//         disableUnderline
+//         className={Style.input}
+//         placeholder="Coloque aqui uma breve descrição do evento"
+//         {...register("description", {
+//           maxLength: {
+//             value: 80,
+//             message: "Excedeu o tamanho máximo de 80 caracteres.",
+//           },
+//         })}
+//       />
+//       <ErrorMessage errors={errors} name="description" render={({ message }) => <p>{message}</p>} />
+
+//       {!message ? null : <p className={Style.messageAPI}> {message}</p>}
+//       <ButtonSubmit type="submit" value="Cadastrar Evento" />
+//     </Box>
+//   );
+// };

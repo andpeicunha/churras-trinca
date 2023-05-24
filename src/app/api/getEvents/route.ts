@@ -10,12 +10,10 @@ export async function GET(req: Request) {
     const id = new ObjectId(idString);
     const client = (await clientPromise).db("churras").collection("event");
     const event = await client.findOne({ _id: id });
-    console.log(event);
     return NextResponse.json({ event });
   } else {
     const client = (await clientPromise).db("churras").collection("event");
     const events = await client.find({}).toArray();
-    console.log(events);
     return NextResponse.json({ events });
   }
 }
