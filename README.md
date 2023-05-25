@@ -16,7 +16,7 @@ Projeto para gerenciamento de churrasco entre amigos.
 
 <br>
 
-🎨 Responsive Design
+### 🎨 Responsive Design
 
 - Material UI
   https://mui.com/material-ui/getting-started/overview/
@@ -26,7 +26,7 @@ Projeto para gerenciamento de churrasco entre amigos.
 
 <br>
 
-⚡ Databases NoSQL
+### ⚡ Databases NoSQL
 
 - MongoDB
   https://www.mongodb.com/
