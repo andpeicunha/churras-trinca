@@ -16,10 +16,11 @@ Projeto para gerenciamento de churrasco entre amigos.
 
 <br>
 
-🎨 Framework de Design
+🎨 Responsive Design
 
 - Material UI
   https://mui.com/material-ui/getting-started/overview/
+
 - Sass
   https://sass-lang.com/
 
