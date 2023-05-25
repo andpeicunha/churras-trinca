@@ -3,27 +3,58 @@
 import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { ButtonSubmit } from "@/app/components/button";
 import { Agenda } from "@/app/agenda/page";
+import S from "./page.module.scss";
+import { Box, LinearProgress, Input, TextField } from "@mui/material";
+import { BgMain } from "@/app/components/background";
 
-import style from "./page.module.scss";
+interface IPropsSignin {
+  email: string;
+}
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
-
+  const [messageLogin, setMessageLogin] = useState("");
   const { data: session, status } = useSession();
+
+  const validationSchema = Yup.object().shape({
+    email: Yup.string().required("Email é obrigatório").email("Email inválido"),
+  });
+  const formOptions = { resolver: yupResolver(validationSchema) };
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm(formOptions);
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const onSubmit = (data: any) => {
+    setMessageLogin("Por favor aguarde...");
+    const email = data.email;
     signIn("email", { redirect: true, email: email });
   };
 
   if (status === "loading") {
-    return <div className={style.main}>Verificando Login...</div>;
+    return (
+      <>
+        <div className={S.loading}>
+          <Box sx={{ width: "80%" }}>
+            <span className={S.loadingText}>Verificando seu login...</span>
+            <LinearProgress />
+          </Box>
+        </div>
+        <BgMain type="one" />
+      </>
+    );
   }
 
   if (session) {
@@ -36,32 +67,34 @@ export default function SignInPage() {
 
   return (
     <>
-      <div className={style.main}>
-        <div className={style.img}>
+      <div className={S.mainSignin}>
+        <div className={S.imgChurrasSection}>
           <Image src="/churras-firma.jpg" alt="logo" fill={true} priority sizes="(max-width: 1000px) 100vw" />
         </div>
 
-        <div className={style.formMain}>
+        <div className={S.formSection}>
           <h1>Agenda de Churras</h1>
 
-          <form onSubmit={onSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <label>Email</label>
             <br />
-            <input
-              type="text"
-              placeholder="E-mail"
-              name="email"
-              id="email"
-              value={email}
-              onChange={handleEmailChange}
+            <TextField
+              {...register("email", {
+                required: "Campo obrigatório",
+              })}
+              placeholder={`digite seu e-mail`}
+              className={S.input}
+              fullWidth
+              autoFocus
             />
+            <ErrorMessage errors={errors} name="email" render={({ message }) => <p className={S.error}>{message}</p>} />
             <ButtonSubmit value="Entrar" type="submit" />
-            {/* <div className={style.divider} />
-            <ButtonSubmit value="Google" type="button" onClick={() => signIn("google")} /> */}
+
+            {messageLogin && <p className={S.error}>{messageLogin}</p>}
           </form>
-          <Image src="/bg-home-full.png" alt="background" fill={true} priority sizes="(max-width: 1000px) 100vw" />
         </div>
       </div>
+      <BgMain type="one" />
     </>
   );
 }

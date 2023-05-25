@@ -2,6 +2,7 @@ import React from "react";
 
 import Image from "next/image";
 import Style from "./page.module.scss";
+import { BgMain } from "@/app/components/background";
 
 export default function Verify() {
   return (
@@ -27,6 +28,7 @@ export default function Verify() {
           </div>
         </div>
       </div>
+      <BgMain type="one" />
     </>
   );
 }

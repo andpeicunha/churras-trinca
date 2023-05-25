@@ -101,12 +101,10 @@ export function Agenda() {
             <div data-testid="section-skeleton-loading" className={Style.eventsMain}>
               <Skeleton variant="rectangular" width={150} height={150} className={Style.skeleton} />
               <Skeleton variant="rectangular" width={150} height={150} className={Style.skeleton} />
-              <Skeleton variant="rectangular" width={150} height={150} className={Style.skeleton} />
-              <Skeleton variant="rectangular" width={150} height={150} className={Style.skeleton} />
             </div>
           </>
         ) : (
-          events.length !== 0 && (
+          events.length >= 0 && (
             <>
               <div data-testid="section-events-main" className={Style.eventsMain}>
                 {events.map((e) => (
@@ -117,6 +115,7 @@ export function Agenda() {
                     name={e.name}
                     date={e.date}
                     description={e.description}
+                    users={e.users}
                   />
                 ))}
                 <ButtonAddEvent onClick={handleOpen} />
@@ -146,6 +145,7 @@ export function Agenda() {
             className={Style.input}
             placeholder="Coloque aqui o nome do evento (Max: 20 caracteres)"
             disableUnderline
+            autoFocus
           />
           <ErrorMessage errors={errors} name="name" render={({ message }) => <p>{message}</p>} />
 
@@ -187,62 +187,3 @@ export function Agenda() {
     </>
   );
 }
-
-// const ModalNewEvent = () => {
-//   return (
-//     <Box className={Style.modal} component="form" autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-//       <div className={Style.title}>Cadastrar Novo Churras</div>
-
-//       <div className={Style.label} data-req>
-//         Nome do Evento
-//       </div>
-//       <Input
-//         {...register("name", {
-//           required: "Campo obrigatório",
-//           maxLength: {
-//             value: 35,
-//             message: "Excedeu o tamanho máximo de 35 caracteres.",
-//           },
-//         })}
-//         className={Style.input}
-//         placeholder="Coloque aqui o nome do evento (Max: 20 caracteres)"
-//         disableUnderline
-//       />
-//       <ErrorMessage errors={errors} name="name" render={({ message }) => <p>{message}</p>} />
-
-//       <div className={Style.label} data-req>
-//         Data do Evento
-//       </div>
-//       <Input
-//         {...register("date", {
-//           required: "Campo obrigatório",
-//           pattern: {
-//             value: /\d{2}\/\d{2}/,
-//             message: "Formato inválido (DD/MM) ex: 05/06",
-//           },
-//         })}
-//         className={Style.input}
-//         placeholder="Preencha a Data do Evento (DD/MM)"
-//         disableUnderline
-//       />
-//       <ErrorMessage errors={errors} name="date" render={({ message }) => <p>{message}</p>} />
-
-//       <div className={Style.label}>Descrição</div>
-//       <Input
-//         disableUnderline
-//         className={Style.input}
-//         placeholder="Coloque aqui uma breve descrição do evento"
-//         {...register("description", {
-//           maxLength: {
-//             value: 80,
-//             message: "Excedeu o tamanho máximo de 80 caracteres.",
-//           },
-//         })}
-//       />
-//       <ErrorMessage errors={errors} name="description" render={({ message }) => <p>{message}</p>} />
-
-//       {!message ? null : <p className={Style.messageAPI}> {message}</p>}
-//       <ButtonSubmit type="submit" value="Cadastrar Evento" />
-//     </Box>
-//   );
-// };

@@ -12,6 +12,7 @@ export async function POST(req: Request) {
     name,
     date,
     description,
+    users: [],
   };
 
   const db = client.db("churras").collection("event");

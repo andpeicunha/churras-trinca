@@ -10,14 +10,19 @@
     justify-content: flex-start;
     align-items: center;
     width: 80%;
-    min-height: 400px;
+    min-height: 250px;
 
     margin-top: 2rem;
     padding-top: 1rem;
+    padding-bottom: 25px;
 
     background-color: white;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
     z-index: 100;
+
+    @include mobile-599 {
+        width: 90%;
+    }
 }
 
 .titleSection {
@@ -40,8 +45,18 @@
         }
 
         [data-testid="event-name"] {
-            font-size: $font-size-xl;
+            font-size: $font-size-lg;
             font-weight: 800;
+        }
+
+        [data-testid="event-icon"] {
+            display: flex;
+            justify-content: center;
+            font-size: $font-size-sm;
+
+            img {
+                margin-right: 5px;
+            }
         }
     }
 }
@@ -51,6 +66,7 @@
     flex-direction: column;
     width: 90%;
     font-family: var(--font-inter);
+    margin-bottom: 18px;
 
     .iconAddUser {
         display: flex;
@@ -75,7 +91,26 @@
         grid-gap: 10px;
         margin-top: 10px;
 
+        [disabled] {
+            visibility: hidden;
+        }
 
+        & .messageAPI {
+            grid-column: 1/span 2;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(91, 253, 148);
+            font-size: $font-size-sm;
+            color: black;
+            padding: 5px 0;
+            border-radius: 5px;
+            width: 99%;
+            text-align: center;
+            margin-top: 0px;
+            margin-bottom: -10px;
+            transition: all 0.5s ease-in-out;
+            transition-delay: 0.5s;
+        }
 
         input {
             padding-left: 5px;
@@ -100,4 +135,53 @@
         }
 
     }
+}
+
+.listUserSection {
+    display: grid;
+    grid-template-columns: 0.08fr 1.3fr 0.2fr;
+    width: 90%;
+
+    font-family: var(--font-inter);
+    font-size: $font-size-sm;
+    margin-top: 8px;
+    margin-bottom: 2px;
+
+    @include mobile-599 {
+        grid-template-columns: 0.08fr 1.1fr 0.2fr;
+    }
+
+    img {
+        cursor: pointer;
+        margin-top: 1px;
+    }
+
+    .listUserName {
+        width: 80%;
+    }
+
+    .listUserValue {
+        text-align: right;
+    }
+}
+
+.number {
+    font-family: var(--font-raleway);
+    font-weight: 600;
+}
+
+.divider {
+    width: 92%;
+    height: 1px;
+    background-color: rgb(229, 194, 49, 0.5);
+}
+
+.linkBack {
+    position: relative;
+    background-color: yellow;
+    width: 66%;
+    height: 0px;
+    top: 6px;
+    left: 0rem;
+    scale: 1.5;
 }

@@ -1,9 +1,8 @@
-import React from "react";
-
+"use client";
+import React, { useEffect } from "react";
 import Image from "next/image";
 
 import { IPropsEvent } from "@/app/lib/axiosFetch";
-
 import Style from "@/app/agenda/page.module.scss";
 
 interface IPropsBoxEvent extends IPropsEvent {
@@ -11,6 +10,19 @@ interface IPropsBoxEvent extends IPropsEvent {
 }
 
 export function BoxEvent({ ...props }: IPropsBoxEvent) {
+  const [sumTotal, setSumTotal] = React.useState(0);
+  const [countUsers, setCountUsers] = React.useState(0);
+
+  console.log(props.users?.length);
+  useEffect(() => {
+    if (props.users) {
+      const countValorTotal = props.users.reduce((acc: number, curr: { value: any }) => acc + Number(curr.value), 0);
+      const countTotalUsers = props.users.length;
+      setSumTotal(countValorTotal);
+      setCountUsers(countTotalUsers);
+    }
+  }, []);
+
   return (
     <div
       data-testid={`section-event-${props._id.toString()}`}
@@ -27,11 +39,11 @@ export function BoxEvent({ ...props }: IPropsBoxEvent) {
       <div className={Style.details}>
         <div className={Style.people}>
           <Image src="/icon-people.png" alt="Qtde de Pessoas" width={20} height={20} />
-          <span>{!props.total_people ? " -" : props.total_people}</span>
+          <span className={Style.number}>{!countUsers ? " -" : countUsers}</span>
         </div>
         <div className={Style.money}>
           <Image src="/icon-money.png" alt="Qtde de Pessoas" width={20} height={20} />
-          <span>{!props.current_total ? " -" : `R$ ${props.current_total}`}</span>
+          <span className={Style.number}>{!sumTotal ? " -" : `R$ ${sumTotal}`}</span>
         </div>
       </div>
     </div>

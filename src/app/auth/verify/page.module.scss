@@ -3,13 +3,12 @@
 .main {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
+  height: 100vh;
 
   @include tablet-768 {
     grid-template-columns: 1fr;
   }
 
-  height: 100vh;
-  background-color: #ffd836;
 }
 
 .img {

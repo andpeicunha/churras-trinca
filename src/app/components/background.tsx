@@ -1,21 +1,29 @@
 import React from "react";
 import Image from "next/image";
 
-import Style from "@/app/agenda/page.module.scss";
-export function BgMain(props: any) {
+import S from "./background.module.scss";
+export function BgMain(props: { status?: string; type?: "one" | "two" }) {
   const status = props.status;
+  const type = props.type;
+
   return (
     <>
-      <Image
-        src="/bg-home-full.png"
-        alt="background"
-        fill
-        sizes="(max-width: 768px) 100vw"
-        quality={90}
-        priority
-        className={Style.imgBg}
-      />
-      {status === "loading" ? <div className={Style.bgCinzaLoad} /> : <div className={Style.bgCinza} />}
+      <section className={S.mainBg}>
+        <Image
+          src="/bg-home-full.png"
+          alt="background"
+          fill
+          sizes="(max-width: 768px) 100vw"
+          quality={90}
+          priority
+          className={S.imgBg}
+        />
+        {type === "one" ? null : status === "loading" ? (
+          <div className={S.bgCinzaLoad} />
+        ) : (
+          <div className={S.bgCinza} />
+        )}
+      </section>
     </>
   );
 }

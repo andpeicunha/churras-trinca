@@ -3,14 +3,17 @@ import { ObjectId } from "mongodb";
 
 export interface IPropsEvent {
   events?: string;
+  id?: string;
   _id: ObjectId;
   name: string;
   date: string;
   description?: string;
-  status?: string;
-  id?: string;
-  total_people?: string;
-  current_total?: string;
+  users?: {
+    idUser: string;
+    name: string;
+    value: string;
+    status: string;
+  }[];
 }
 
 type TodoErrorResponse = {
@@ -44,7 +47,19 @@ export async function addEvent(event: string) {
 
 export async function addUserEvent(event: string) {
   try {
-    const response = await axios.post(`/api/addEvent?${event}`);
+    const response = await axios.post(`/api/addUserEvent?${event}`);
+    return response;
+  } catch (err: unknown) {
+    if (isAxiosError(err)) {
+      console.log(err.response?.data as TodoErrorResponse);
+    }
+  }
+}
+
+export async function deleteUserEvent(event: string) {
+  try {
+    console.log(event);
+    const response = await axios.post(`/api/deleteUserEvent?${event}`);
     return response;
   } catch (err: unknown) {
     if (isAxiosError(err)) {

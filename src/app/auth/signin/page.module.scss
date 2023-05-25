@@ -1,6 +1,21 @@
 @import "@/app/styles/mixins";
 
-.main {
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  .loadingText {
+    font-size: $font-size-sm;
+    padding-top: -5px;
+  }
+}
+
+.mainSignin {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
 
@@ -11,7 +26,7 @@
   height: 100vh;
 }
 
-.img {
+.imgChurrasSection {
   overflow: hidden;
   position: relative;
 
@@ -26,7 +41,7 @@
   }
 }
 
-.formMain {
+.formSection {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,17 +49,16 @@
   overflow: hidden;
   position: relative;
 
-  & img {
-    object-fit: cover;
-    z-index: -50;
+  h1 {
+    margin-top: 3rem;
+    font-family: var(--font-raleway);
+    font-weight: 700;
   }
 
-  & h1 {
-    margin-top: 3rem;
-  }
 
   & form {
-    margin-top: 20%;
+    margin-top: 5%;
+    width: 90%;
   }
 
   & label {
@@ -52,17 +66,21 @@
     font-weight: 700;
   }
 
-  & input {
-    padding: 10px 15px;
-    margin: 10px 0;
+  .input {
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 5px;
     width: 99%;
+  }
 
+  & input {
     &::placeholder {
       font-size: 15px;
       font-weight: 200;
       font-style: italic;
       text-transform: lowercase;
     }
+
   }
 
   & .divider {
@@ -71,4 +89,20 @@
     background-color: rgba(0, 0, 0, 0.3);
     margin: 10px 0;
   }
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.6);
+  border-radius: 5px;
+  color: white;
+  font-size: $font-size-sm;
+  width: 100%;
+  margin: 5px 0 0 0;
+  padding: 3px 0;
+}
+
+.error::before {
+  display: inline;
+  content: "⚠ ";
+  padding-left: 8px;
 }
